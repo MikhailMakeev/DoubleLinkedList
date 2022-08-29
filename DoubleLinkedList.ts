@@ -131,6 +131,7 @@ class DoubleLinkedList {
 }
 
 let doubleLinkedList = new DoubleLinkedList();
+
 doubleLinkedList.addFirst('1111111111111');
 doubleLinkedList.addFirst('2222222222222222');
 doubleLinkedList.addLast('30000000');
