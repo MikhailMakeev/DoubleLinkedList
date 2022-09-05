@@ -1,16 +1,16 @@
-class NodeDLL {
+class NodeDLLOld {
     public value: string;
-    public next!: NodeDLL | null;
-    public prev!: NodeDLL | null;
+    public next: NodeDLLOld;
+    public prev: NodeDLLOld;
 
     constructor(value: string) {
         this.value = value;
     }
 }
 
-class DoubleLinkedList {
-    head: NodeDLL|null;
-    tail: NodeDLL|null;
+class DoubleLinkedListOld {
+    head: NodeDLLOld;
+    tail: NodeDLLOld;
 
     constructor() {
         this.head = null;
@@ -22,11 +22,10 @@ class DoubleLinkedList {
     }
 
     addFirst(newValue: string): void {
-        const temp = new NodeDLL(newValue);
+        const temp = new NodeDLLOld(newValue);
         if (this.isEmpty()) {
             this.tail = temp;
         } else {
-            // @ts-ignore
             this.head.prev = temp;
         }
         temp.next = this.head;
@@ -40,22 +39,18 @@ class DoubleLinkedList {
             cur = cur.next;
             c++;
         }
-        let temp = new NodeDLL(newValue);
-        // @ts-ignore
+        let temp = new NodeDLLOld(newValue);
         cur.prev.next = temp;
-        // @ts-ignore
         temp.prev = cur.prev;
-        // @ts-ignore
         cur.prev = temp;
         temp.next = cur;
     }
 
     addLast(newValue: string): void {
-        let temp = new NodeDLL(newValue);
+        let temp = new NodeDLLOld(newValue);
         if (this.isEmpty()) {
             this.head = temp;
         } else {
-            // @ts-ignore
             this.tail.next = temp;
         }
         temp.prev = this.tail;
@@ -63,34 +58,24 @@ class DoubleLinkedList {
     }
 
     remoteFirst(): void {
-        // @ts-ignore
         if (this.head.next == null)
             this.tail = null;
         else
-        { // @ts-ignore
             this.head.next.prev = null;
-        }
-        // @ts-ignore
         this.head = this.head.next;
     }
 
     remoteLast():void {
-        // @ts-ignore
         if (this.head.next == null)
             this.head = null;
         else
-        { // @ts-ignore
             this.tail.prev.next = null;
-        }
-        // @ts-ignore
         this.tail = this.tail.prev;
     }
 
     remoteAt(newValue: string): void {
         let cur = this.head;
-        // @ts-ignore
         while (cur.value !== newValue) {
-            // @ts-ignore
             cur = cur.next;
             if (cur == null)
                 return;
@@ -98,46 +83,31 @@ class DoubleLinkedList {
         if (cur == this.head)
             this.remoteFirst();
         else
-        { // @ts-ignore
             cur.prev.next = cur.next;
-        }
         if (cur == this.tail)
             this.remoteLast();
         else
-        { // @ts-ignore
             cur.next.prev = cur.prev;
-        }
     }
 
-    find(value: string): NodeDLL {
+    find(value: string): NodeDLLOld {
         let cur = this.head;
-        // @ts-ignore
         while (cur.value !== value) {
-            // @ts-ignore
             cur = cur.next;
             if (cur == null)
-            { // @ts-ignore
                 return null;
-            }
         }
-        // @ts-ignore
         return cur;
     }
 
-    edit(oldValue: string, newValue: string): NodeDLL {
+    edit(oldValue: string, newValue: string): NodeDLLOld {
         let cur = this.head;
-        // @ts-ignore
         while (cur.value !== oldValue) {
-            // @ts-ignore
             cur = cur.next;
             if (cur == null)
-            { // @ts-ignore
                 return null;
-            }
         }
-        // @ts-ignore
         cur.value = newValue;
-        // @ts-ignore
         return cur;
     }
 
@@ -160,13 +130,13 @@ class DoubleLinkedList {
     }
 }
 
-let doubleLinkedList = new DoubleLinkedList();
+let doubleLinkedListOld = new DoubleLinkedListOld();
 
-doubleLinkedList.addFirst('1111111111111');
-doubleLinkedList.addFirst('2222222222222222');
-doubleLinkedList.addLast('30000000');
-doubleLinkedList.addByIndex('44444', 1);
-console.log("size " + doubleLinkedList.size());
-doubleLinkedList.print();
-doubleLinkedList.edit('30000000', '9999999');
-doubleLinkedList.print();
+doubleLinkedListOld.addFirst('1111111111111');
+doubleLinkedListOld.addFirst('2222222222222222');
+doubleLinkedListOld.addLast('30000000');
+doubleLinkedListOld.addByIndex('44444', 1);
+console.log("size " + doubleLinkedListOld.size());
+doubleLinkedListOld.print();
+doubleLinkedListOld.edit('30000000', '9999999');
+doubleLinkedListOld.print();
